@@ -16,20 +16,19 @@ class LoginController extends Controller
         $this->service = $service;
     }
 
-    public function store(LoginRequest $request): JsonResponse
+    public function index()
     {
-        mpr($request);
-        pr($request); 
+        return view('auth.login'); 
+    }
 
+    public function store(LoginRequest $request)
+    {
         $token = $this->service->login($request->validated());
 
         if (!$token) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
         }
 
-        return response()->json([
-            'message' => 'Login successful',
-            'token' => $token,
-        ]);
+        return redirect()->route('dashboard');
     }
 }
