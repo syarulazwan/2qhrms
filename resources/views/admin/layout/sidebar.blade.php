@@ -68,7 +68,7 @@
                             </a>
                             <ul class="submenu-content opensubmegamenu">
                                 <li>
-                                    <a href="#">User List</a>
+                                    <a href="{{ route('administration.user')}}">User List</a>
                                 </li>
                             </ul>
                         </li>

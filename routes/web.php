@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Administration\User\UserController;
 
 
 Route::get('/', function () {
@@ -25,11 +26,7 @@ Route::middleware(['auth', 'prevent-back-history'])->group(function () {
 
     Route::get('/logout', [LogoutController::class, 'Logout'])->name('page.logout');
 
-    // Route::prefix('product')->controller(ProductController::class)->group(function() {
-    //     Route::get('/', 'index')->name('product');
-    //     Route::post('store', 'store')->name('product.store');
-    //     Route::get('single-data/{id}',  'show')->name('product.show');
-    //     Route::put('update/{id}',  'update')->name('product.update');
-    //     Route::delete('delete/{id}',  'destroy')->name('product.delete');
-    // });
+    Route::prefix('administration')->controller(UserController::class)->group(function() {
+        Route::get('/', 'index')->name('administration.user');
+    });
 });

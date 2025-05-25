@@ -23,12 +23,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/slick-theme.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/scrollbar.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/datatables.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/datatables.css') }}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/owlcarousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css') }}" media="screen">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   </head>
   <style>
     .breadcrumb {
@@ -89,11 +91,11 @@
     {{-- <script src="{{ asset('assets/js/chart/apex-chart/stock-prices.js') }}"></script> --}}
     {{-- <script src="{{ asset('assets/js/chart/apex-chart/moment.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/notify/bootstrap-notify.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dashboard/default.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/dashboard/default.js') }}"></script> --}}
     <!-- <script src="{{ asset('assets/js/notify/index.js') }}"></script> -->
-    <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-    <script src="{{ asset('assets/js/datatable/datatables/datatable.custom1.js') }}"></script>
+    <script src="{{ asset('assets/js/datatable/datatables/datatable.custom1.js') }}"></script> --}}
     <script src="{{ asset('assets/js/owlcarousel/owl.carousel.js') }}"></script>
     <script src="{{ asset('assets/js/owlcarousel/owl-custom.js') }}"></script>
     <script src="{{ asset('assets/js/typeahead/handlebars.js') }}"></script>
