@@ -25,6 +25,7 @@ class LoginRequest extends BaseFormRequest
             'email' => 'required|email',
             'password' => 'required|string',
         ];
+
     }
 
     public function messages(){

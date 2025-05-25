@@ -1,23 +1,25 @@
-(function ($) {
-    "use strict";
-    /*----------------------------------------
-     passward show hide
-     ----------------------------------------*/
-    $('.show-hide').show();
-    $('.show-hide span').addClass('show');
+(function($) {
+  "use strict";
 
-    $('.show-hide span').click(function () {
-        if ($(this).hasClass('show')) {
-            $('input[name="login[password]"]').attr('type', 'text');
-            $(this).removeClass('show');
-        } else {
-            $('input[name="login[password]"]').attr('type', 'password');
-            $(this).addClass('show');
-        }
-    });
-    $('form button[type="submit"]').on('click', function () {
-        $('.show-hide span').text('Show').addClass('show');
-        $('.show-hide').parent().find('input[name="login[password]"]').attr('type', 'password');
-    });
+  $('.toggle-password').on('click', function() {
+    const input = $('#password');
+    const icon = $(this).find('i');
+
+    if (input.attr('type') === 'password') {
+      input.attr('type', 'text');
+      icon.removeClass('fa-eye').addClass('fa-eye-slash');
+    } else {
+      input.attr('type', 'password');
+      icon.removeClass('fa-eye-slash').addClass('fa-eye');
+    }
+  });
+
+  // Optional: saat submit, pastikan password tersembunyi lagi
+  $('form').on('submit', function() {
+    $('#password').attr('type', 'password');
+    $('.toggle-password i').removeClass('fa-eye-slash').addClass('fa-eye');
+  });
 
 })(jQuery);
+
+

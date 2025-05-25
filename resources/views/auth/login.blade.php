@@ -24,6 +24,35 @@
     <link id="color" rel="stylesheet" href="{{ asset('../assets/css/color-1.css" media="screen') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('../assets/css/responsive.css') }}">
   </head>
+
+  <style>
+
+    <style>
+      .form-input {
+        position: relative;
+      }
+
+      .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 10px;          /* jarak dari kanan input */
+        transform: translateY(-50%);
+        border: none;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+
+      .toggle-password:focus {
+        outline: none;
+      }
+    </style>
+
+  </style>
+
   <body>
     <div class="container-fluid p-0">
       <div class="row m-0">
@@ -40,13 +69,28 @@
                         <label class="col-form-label">Email Address</label>
                         <input class="form-control" type="email" name="email" required placeholder="Test@gmail.com">
                     </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Password</label>
-                        <div class="form-input position-relative">
-                            <input class="form-control" type="password" name="password" required placeholder="*********">
-                            <div class="show-hide"><span class="show"></span></div>
-                        </div>
+                  <div class="form-group">
+                    <label class="col-form-label">Password</label>
+                    <div class="form-input position-relative">
+                      <input
+                        class="form-control"
+                        type="password"
+                        name="password"
+                        id="password"
+                        required
+                        placeholder="*********"
+                        style="padding-right: 2.5rem;"
+                      >
+                      <button
+                        type="button"
+                        class="toggle-password"
+                        aria-label="Toggle password visibility"
+                      >
+                        <i class="fa fa-eye"></i>
+                      </button>
                     </div>
+                  </div>
+
                     <div class="form-group mb-0">
                         <div class="checkbox p-0">
                             <input id="checkbox" type="checkbox" name="remember">
@@ -70,6 +114,8 @@
       <script src="{{ asset('../assets/js/icons/feather-icon/feather-icon.js') }}"></script>
       <script src="{{ asset('../assets/js/config.js') }}"></script>
       <script src="{{ asset('../assets/js/script.js') }}"></script>
+      <script src="{{ asset('../assets/js/login.js') }}"></script>
+
     </div>
   </body>
 </html>
