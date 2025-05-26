@@ -36,6 +36,7 @@ Route::middleware(['auth', 'prevent-back-history'])->group(function () {
 
         Route::prefix('company')->controller(CompanyController::class)->group(function () {
             Route::get('/', 'index')->name('administration.company');
+            Route::get('/ajaxcompany', 'ajaxcompany')->name('administration.ajaxcompany');
         });
 
     });

@@ -7,26 +7,26 @@
             font-family: 'Nunito Sans', sans-serif;
         }
 
-        table#dummyTable {
+        table {
             border-collapse: collapse;
             width: 100%;
             font-size: 12px;
             font-family: 'Nunito Sans', sans-serif;
         }
 
-        table#dummyTable th,
-        table#dummyTable td {
+        table th,
+        table td {
             border: 1px solid #dee2e6;
             padding: 12px;
             text-align: left;
         }
 
-        table#dummyTable thead {
+        table thead {
             background-color: #f8f9fa;
             font-weight: 00;
         }
 
-        table#dummyTable tbody tr:hover {
+        table tbody tr:hover {
             background-color: #f1f1f1;
         }
 
@@ -55,46 +55,15 @@
                             <div class="table-responsive">
                                 <div id="btn-place" class="text-right" style="margin-right: 10px;"></div>
                                     <div class="">
-                                        <table id="dummyTable" class="display table table-bordered" style="width:100%">
+                                        <table id="tablecompany" class="display table table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Submission Date</th>
-                                                    <th>Distributor Name</th>
-                                                    <th>Application Type</th>
-                                                    <th>Registration Type</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th>Name</th>
+                                                    <th>Filename</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>13-Apr-2025</td>
-                                                    <td>STANDARD FINANCIAL ADVISER SDN BHD</td>
-                                                    <td>New</td>
-                                                    <td>-</td>
-                                                    <td>Approved</td>
-                                                    <td><button>👁 View</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>13-Apr-2025</td>
-                                                    <td>RHB UNIT TRUST MANAGEMENT BERHAD</td>
-                                                    <td>New</td>
-                                                    <td>-</td>
-                                                    <td>Approved</td>
-                                                    <td><button>👁 View</button></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>13-Apr-2025</td>
-                                                    <td>ING FUNDS BERHAD</td>
-                                                    <td>New</td>
-                                                    <td>-</td>
-                                                    <td>Approved</td>
-                                                    <td><button>👁 View</button></td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -113,10 +82,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
-        $('#dummyTable').DataTable({
-            lengthMenu: [5, 10, 25, 50, 100],
-            pageLength: 10,
-            responsive: true,
+        $(document).ready(function () {
+
+            $('#tablecompany').DataTable({
+                processing: true,
+                serverSide: false, 
+                ajax: {
+                    url: '{{ route("administration.ajaxcompany") }}',
+                    type: 'GET'
+                },
+                lengthMenu: [5, 10, 25, 50, 100],
+                pageLength: 10,
+                columns: [
+                    { data: 'no', name: 'id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'filename', name: 'filename' }
+                ]
+            });
+
         });
+
     </script>
 @endpush
