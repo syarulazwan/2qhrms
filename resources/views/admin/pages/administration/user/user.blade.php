@@ -7,26 +7,26 @@
             font-family: 'Nunito Sans', sans-serif;
         }
 
-        table#dummyTable {
+        table {
             border-collapse: collapse;
             width: 100%;
             font-size: 12px;
             font-family: 'Nunito Sans', sans-serif;
         }
 
-        table#dummyTable th,
-        table#dummyTable td {
+        table th,
+        table td {
             border: 1px solid #dee2e6;
             padding: 12px;
             text-align: left;
         }
 
-        table#dummyTable thead {
+        table thead {
             background-color: #f8f9fa;
             font-weight: 00;
         }
 
-        table#dummyTable tbody tr:hover {
+        table tbody tr:hover {
             background-color: #f1f1f1;
         }
 
@@ -82,7 +82,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script>
-
+        
        $(document).ready(function () {
 
             $('#tableuser').DataTable({
@@ -102,6 +102,7 @@
             });
 
         });
+
 
     </script>
 @endpush
