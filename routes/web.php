@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Administration\User\UserController;
+use App\Http\Controllers\Administration\Company\CompanyController;
 
 
 Route::get('/', function () {
@@ -26,7 +27,16 @@ Route::middleware(['auth', 'prevent-back-history'])->group(function () {
 
     Route::get('/logout', [LogoutController::class, 'Logout'])->name('page.logout');
 
-    Route::prefix('administration')->controller(UserController::class)->group(function() {
-        Route::get('/', 'index')->name('administration.user');
+   Route::prefix('administration')->group(function () {
+
+        Route::prefix('user')->controller(UserController::class)->group(function () {
+            Route::get('/', 'index')->name('administration.user');
+        });
+
+        Route::prefix('company')->controller(CompanyController::class)->group(function () {
+            Route::get('/', 'index')->name('administration.company');
+        });
+
     });
+
 });

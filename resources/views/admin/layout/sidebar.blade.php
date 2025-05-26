@@ -80,7 +80,7 @@
                             </a>
                             <ul class="submenu-content opensubmegamenu">
                                 <li>
-                                    <a href="#">Company</a>
+                                    <a href="{{ route('administration.company')}}">Company</a>
                                 </li>
                             </ul>
                         </li>
