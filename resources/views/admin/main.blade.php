@@ -61,7 +61,7 @@
       <div class="page-body-wrapper">
         @include('admin.layout.sidebar')
         <br>
-        <div class="page-body">
+        <div class="page-body panding">
           @yield('pages') 
         </div>
          @include('admin.layout.footer') 
@@ -134,12 +134,14 @@
 
      function handleSidebar() {
         const sidebar = document.querySelector('.sidebar-width') || document.querySelector('.sidebar'); 
+        const pageBody = document.querySelector('.page-body'); 
         // kalau dah remove sidebar-width, cari class lain sebagai fallback
 
         if (!sidebar) return;
 
         if (window.innerWidth <= 768) {
             sidebar.classList.remove('sidebar-width');
+            pageBody.classList.remove('panding');
         } else {
 
       sidebar.classList.add('sidebar-width')
