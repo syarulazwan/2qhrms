@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Administration\CompanyService;
 Use App\Http\Requests\Administration\Company\CompanyRequest;
+Use App\Http\Requests\Administration\Company\UpdateCompanyRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -85,6 +86,61 @@ class CompanyController extends Controller
             return response()->json(['message' => 'Company creation failed.'], 500);
         }
     }
+
+    public function single($id = null)
+    {
+        $company = $this->CompanyService->getById($id);
+        if (!$company) {
+            return response()->json(['error' => 'Company not found'], 404);
+        }
+        return response()->json($company);
+    }
+
+
+    public function update(UpdateCompanyRequest $request, $id)
+    {
+        $data = $request->validated();
+
+        DB::beginTransaction();
+
+        try {
+
+            if ($request->hasFile('logo_update')) {
+                $logo = $request->file('logo_update');
+                $logoPath = $logo->store('logos', 'public');
+                $data['logo_update'] = $logoPath;
+            }
+
+            $create = $this->CompanyService->updateCompany($data,$id);
+
+            DB::commit();
+
+            return response()->json(['message' => 'Company created successfully!'], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            if (!empty($logoPath) && \Storage::disk('public')->exists($logoPath)) {
+                \Storage::disk('public')->delete($logoPath);
+            }
+
+            Log::error('Company creation failed: ' . $e->getMessage());
+
+            return response()->json(['message' => 'Company creation failed.'], 500);
+        }
+    }
+
+    public function delete($id = null)
+    {
+        $deleted = $this->CompanyService->delete($id);
+
+        if (!$deleted) {
+            return response()->json(['error' => 'Company not found'], 404);
+        }
+
+        return response()->json(['message' => 'Company deleted successfully.']);
+    }
+
+
 
 
 

@@ -38,6 +38,11 @@ Route::middleware(['auth', 'prevent-back-history'])->group(function () {
             Route::get('/', 'index')->name('administration.company');
             Route::get('/ajaxcompany', 'ajaxcompany')->name('administration.ajaxcompany');
             Route::post('/store', 'store')->name('company.store');
+            Route::get('/single/{id}', 'single')->name('company.single');
+            Route::post('/update/{id}', 'update')->name('company.update');
+            Route::delete('/delete/{id}', 'delete')->name('company.delete');
+
+            
         });
 
     });

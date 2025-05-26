@@ -139,6 +139,52 @@
         </div>
     </div>
 
+    <div class="modal fade" id="exampleModalUpdateCompany" tabindex="-1" role="dialog" aria-labelledby="exampleModalUpdateCompanyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-toggle-wrapper social-profile text-start dark-sign-up">
+            <h6 class="modal-header justify-content-left border-0 txt-dark">Update Company</h6>
+            <hr>
+            <h6 class="modal-header justify-content-left border-0 txt-dark">COMPANY INFORMATION</h6>
+            <div class="modal-body">
+            <form id="companyUpdateForm" enctype="multipart/form-data" novalidate>
+                <input type="hidden" id="company_id" name="company_id" value="">
+                <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label txt-dark" for="name_update">Name</label>
+                    <input class="form-control" id="name_update" name="name_update" type="text" placeholder="Enter your company" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label txt-dark" for="email_update">Email Address</label>
+                    <input class="form-control" id="email_update" name="email_update" type="email" placeholder="Enter your email" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label txt-dark" for="logo_update">Logo</label>
+                        <input class="form-control" id="logo_update" name="logo_update" type="file">
+                        <div class="valid-feedback">Looks good!</div>
+                        <img id="logoPreview" src="" alt="Logo Preview" style="margin-top:10px; max-width:100px; max-height:100px; display:none; border:1px solid #ddd; padding:5px;">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label txt-dark" for="website_update">Website</label>
+                        <input class="form-control" id="website_update" name="website_update" type="text" placeholder="Enter your website" required>
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="button" id="submitUpdateCompanyBtn">Update</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
 
 @endsection
 
@@ -216,6 +262,89 @@
                     }
                 });
             });
+
+            // When Edit button clicked
+                
+
+            $(document).on('click', '.editCompanyBtn', function () {
+                let companyId = $(this).data('id');
+                var urlSingleBase = "{{ url('administration/company/single') }}";
+
+                $('#exampleModalUpdateCompany').modal('show');
+                $('#companyUpdateForm')[0].reset();
+                $('#company_id').val(companyId);
+
+                $.ajax({
+                    url: urlSingleBase + '/' + companyId,  // Jadi contoh: /administration/company/single/123
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (response) {
+                        $('#name_update').val(response.name);
+                        $('#email_update').val(response.email);
+                        $('#website_update').val(response.website);
+                          if(response.attachments && response.attachments.logo) {
+                                $('#logoPreview').attr('src', '/storage/' + response.attachments.logo).show();
+                            } else {
+                                $('#logoPreview').hide();
+                            }
+
+                    },
+                    error: function () {
+                        alert('Failed to fetch company data.');
+                        $('#exampleModalUpdateCompany').modal('hide');
+                    }
+                });
+            });
+
+         $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#submitUpdateCompanyBtn').click(function () {
+                let formData = new FormData($('#companyUpdateForm')[0]);
+                let companyId = $('#company_id').val();
+
+                var urlSingleBase = "{{ url('administration/company/update') }}";
+
+                $.ajax({
+                    url: urlSingleBase + '/' + companyId,
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        alert('Company updated successfully!');
+                        $('#exampleModalUpdateCompany').modal('hide');
+                        $('#tablecompany').DataTable().ajax.reload(null, false);
+                    },
+                    error: function () {
+                        alert('Failed to update company.');
+                    }
+                });
+            });
+
+             $(document).on('click', '.deleteCompanyBtn', function () {
+                let companyId = $(this).data('id');
+                let url = "{{ url('administration/company/delete') }}/" + companyId;
+
+                if (confirm('Are you sure you want to delete this company?')) {
+                    $.ajax({
+                        url: url,
+                        method: 'DELETE',
+                        success: function (response) {
+                            alert('Company deleted successfully!');
+                            $('#exampleModalUpdateCompany').modal('hide');
+                            $('#tablecompany').DataTable().ajax.reload(null, false);
+                        },
+                        error: function () {
+                            alert('Failed to delete company.');
+                        }
+                    });
+                }
+            });
+            
 
         });
 
