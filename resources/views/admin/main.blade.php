@@ -61,16 +61,12 @@
       <div class="page-body-wrapper">
         @include('admin.layout.sidebar')
         <br>
-        <div class="page-body panding">
+        <div class="page-body">
           @yield('pages') 
-         
-          
         </div>
          @include('admin.layout.footer') 
       </div>
-      
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
@@ -136,8 +132,6 @@
           }
       });
 
-
-      
      function handleSidebar() {
         const sidebar = document.querySelector('.sidebar-width') || document.querySelector('.sidebar'); 
         // kalau dah remove sidebar-width, cari class lain sebagai fallback
@@ -155,7 +149,6 @@
 
     window.addEventListener('load', handleSidebar);
     window.addEventListener('resize', handleSidebar);
-
 
     </script>
 
