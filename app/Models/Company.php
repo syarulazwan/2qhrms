@@ -10,6 +10,7 @@ class Company extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $guarded = [];
     public function attachments()
     {
         return $this->hasOne(CompanyAttachment::class);

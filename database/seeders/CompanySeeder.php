@@ -16,7 +16,7 @@ class CompanySeeder extends Seeder
             ->create()
             ->each(function ($company) {
                 $company->attachments()->create([
-                    'filename' => fake()->word() . '.pdf',
+                    'logo' => fake()->word() . '.png',
                 ]);
             });
     }

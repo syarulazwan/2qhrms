@@ -14,7 +14,7 @@ return new class extends Migration
        Schema::create('company_attachments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
-            $table->string('filename');
+            $table->string('logo');
             $table->softDeletes();
             $table->timestamps();
         });
